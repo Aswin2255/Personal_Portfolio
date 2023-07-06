@@ -1,4 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+import { Themeaction } from "../../redux/Themeslice";
+
 function Navbar() {
+  const dispatch = useDispatch()
+  const dark = useSelector((state) => state.mode.darkmode);
+  const changetheme = ()=>{
+         dispatch(Themeaction.Setmode(!dark))
+  }
   return (
     <div className="top-0 sticky">
       <nav className="bg-white border-gray-200 dark:bg-gray-900 ">
@@ -10,7 +18,7 @@ function Navbar() {
           </a>
 
           <div className="hidden w-full md:block md:w-auto" id="navbar-default ">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="font-mono flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
                 <a
                   href="#"
@@ -38,7 +46,7 @@ function Navbar() {
               </li>
             </ul>
           </div>
-          <div className="text-white">
+          <div onClick={changetheme} className="dark:text-white cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
