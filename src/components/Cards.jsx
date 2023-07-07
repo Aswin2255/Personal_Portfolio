@@ -1,7 +1,7 @@
 function Cards({ projects }) {
   return (
     <div className="p-10">
-      <div className="max-w-sm rounded overflow-hidden shadow-lg font-mono dark:text-white">
+      <div className="max-w-sm rounded overflow-hidden shadow-lg font-mono dark:text-white border dark:border-slate-800">
         <img className="w-full" src={projects.src} alt="Mountain"></img>
         <div className="px-6 py-4 ">
           <div className="font-bold text-xl mb-2">{projects?.name}</div>
