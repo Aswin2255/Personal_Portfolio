@@ -9,7 +9,7 @@ function Navbar() {
   }
   return (
     <div className="top-0 sticky">
-      <nav className="bg-white border-gray-200 dark:bg-gray-900 ">
+      <nav className="bg-white dark:border-slate-800 dark:bg-gray-900  border-b ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="https://flowbite.com/" className="flex items-center">
             <span className="self-center text-2xl font-mono font-bold whitespace-nowrap dark:text-white">
