@@ -28,9 +28,10 @@ export const projects =  [
       company: "tag8,Mumbai",
       duration: "July 2023 - Present",
       description:[
-        "building and refining the company's product, focusing on enhancing functionality and user experience.",
-        "Built robust business APIs to facilitate seamless communication and data exchange, optimizing product performance.",
-        "Developed a user-friendly Admin panel enabling operational teams to manage product content efficiently, bridging backend and frontend expertise"
+        "Developing and maintaining frontend & backend features across multiple microservices.",
+        "Built a panel to replace manual Excel workflows, reducing update errors by 80% and improving team efficiency",
+        "Revamped a legacy React app using best practices and lazy loading, cutting load time by ~40%.",
+        "Worked on rebuilding the entire product from scratch with Vite, Material UI, and TanStack Query for better performance and maintainability."
       ]
     },
     {
