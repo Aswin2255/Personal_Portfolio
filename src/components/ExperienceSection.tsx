@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, ChevronRight, Activity, Zap, TrendingUp, Presentation } from "lucide-react";
+import { Activity, Zap, TrendingUp } from "lucide-react";
 
 export function ExperienceSection() {
   const container = {
@@ -20,27 +20,35 @@ export function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="py-24 relative bg-black">
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-indigo-900/10 blur-[120px] rounded-full pointer-events-none" />
+    <section id="experience" className="py-24 relative overflow-hidden bg-background border-b-2 border-border">
+      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-border pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border -translate-y-1/2 pointer-events-none" />
       
-      <div className="container mx-auto px-6 max-w-5xl">
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16 md:mb-24"
+          className="mb-16 flex flex-col md:flex-row justify-between items-end gap-4"
         >
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-3xl md:text-5xl font-bold text-white">
-              Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Experience</span>
-            </h2>
-            <div className="h-px bg-white/10 flex-grow hidden md:block"></div>
+          <div className="flex flex-col">
+             <span className="text-accent font-mono text-xs tracking-[0.2em] mb-4 uppercase inline-block border border-accent/30 px-2 py-1 bg-accent/10 w-fit">
+               [ 04 ] WORK HISTORY
+             </span>
+             <h2 className="text-4xl md:text-7xl font-black text-foreground uppercase tracking-tighter mix-blend-difference">
+               Experience.
+             </h2>
           </div>
-          <p className="text-zinc-400 text-lg">Real-world impact and case studies.</p>
+          <div className="text-right pb-2 border-b-2 border-border hidden md:block">
+            <p className="text-muted-foreground text-sm font-mono uppercase tracking-widest max-w-xs">
+              REAL-WORLD IMPACT AND CASE STUDIES.
+            </p>
+          </div>
         </motion.div>
 
-        <div className="relative border-l border-zinc-800 ml-4 md:ml-0 md:pl-8 py-4">
+        <div className="relative border-l-2 border-border ml-4 md:ml-0 md:pl-10 py-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,80 +57,76 @@ export function ExperienceSection() {
             className="mb-16 relative"
           >
             {/* Timeline Dot */}
-            <div className="absolute -left-[45px] top-6 w-4 h-4 rounded-full bg-indigo-500 border-4 border-black box-content z-10 hidden md:block" />
+            <div className="absolute -left-[49px] top-6 w-5 h-5 bg-accent border-4 border-background box-content z-10 hidden md:block" />
             
             <div className="flex flex-col md:flex-row justify-between mb-8 items-start gap-4">
                <div>
-                 <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                 <h3 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-4 uppercase tracking-tighter">
                    Full Stack Developer 
-                   <span className="px-3 py-1 text-xs font-mono uppercase tracking-widest bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20">Tag8</span>
+                   <span className="px-3 py-1 text-xs font-mono uppercase tracking-widest bg-card text-accent border border-accent/50 shadow-[2px_2px_0_hsl(76,100%,50%)]">Tag8</span>
                  </h3>
-                 <p className="text-zinc-400 mt-1 font-mono text-sm">July 2023 – Present</p>
+                 <p className="text-muted-foreground mt-4 font-mono text-sm uppercase tracking-widest">July 2023 – Present</p>
                </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               
               {/* Problem Column */}
-              <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 backdrop-blur-sm relative overflow-hidden group hover:border-red-500/20 transition-colors">
-                <div className="absolute top-0 right-0 p-4 opacity-10 text-red-500 group-hover:scale-110 transition-transform"><Activity size={60} /></div>
-                <h4 className="flex items-center gap-2 font-semibold text-white mb-4">
-                  <div className="w-2 h-2 rounded-full bg-red-400" />
+              <div className="bg-card border-2 border-border p-8 relative overflow-hidden group hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] transition-all">
+                <div className="absolute -bottom-4 -right-4 p-4 opacity-5 text-accent group-hover:scale-110 group-hover:opacity-10 transition-all"><Activity size={120} /></div>
+                <h4 className="flex items-center gap-3 font-black text-foreground uppercase tracking-tight text-xl mb-6 pb-4 border-b-2 border-border">
+                  <div className="w-3 h-3 bg-red-500" />
                   The Problems
                 </h4>
-                <ul className="space-y-3 text-zinc-400 text-sm">
-                  <li className="flex gap-2"><ChevronRight className="shrink-0 text-zinc-600 mt-0.5" size={16} /> Legacy React application had large bundle size and poor performance</li>
-                  <li className="flex gap-2"><ChevronRight className="shrink-0 text-zinc-600 mt-0.5" size={16} /> Manual workflows were handled using Excel</li>
-                  <li className="flex gap-2"><ChevronRight className="shrink-0 text-zinc-600 mt-0.5" size={16} /> Needed internal admin dashboard</li>
-                  <li className="flex gap-2"><ChevronRight className="shrink-0 text-zinc-600 mt-0.5" size={16} /> Needed Shopify order creation/editing automation</li>
+                <ul className="space-y-4 text-muted-foreground text-sm font-mono">
+                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Legacy React app had large bundle size and poor performance.</li>
+                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Manual workflows were handled using Excel.</li>
+                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Lacked internal admin dashboard.</li>
+                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Lacked Shopify order automation.</li>
                 </ul>
               </div>
 
               {/* Solution Column */}
-              <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 backdrop-blur-sm relative overflow-hidden group hover:border-indigo-500/20 transition-colors lg:col-span-1">
-                <div className="absolute top-0 right-0 p-4 opacity-10 text-indigo-500 group-hover:scale-110 transition-transform"><Zap size={60} /></div>
-                <h4 className="flex items-center gap-2 font-semibold text-white mb-4">
-                  <div className="w-2 h-2 rounded-full bg-indigo-400" />
+              <div className="bg-card border-2 border-border p-8 relative overflow-hidden group hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] transition-all lg:col-span-1">
+                <div className="absolute -bottom-4 -right-4 p-4 opacity-5 text-accent group-hover:scale-110 group-hover:opacity-10 transition-all"><Zap size={120} /></div>
+                <h4 className="flex items-center gap-3 font-black text-foreground uppercase tracking-tight text-xl mb-6 pb-4 border-b-2 border-border">
+                  <div className="w-3 h-3 bg-accent" />
                   What I Did
                 </h4>
-                <ul className="space-y-3 text-zinc-400 text-sm">
-                  <li className="flex gap-2"><CheckCircle2 className="shrink-0 text-indigo-400 mt-0.5" size={16} /> Migrated legacy React app to Vite</li>
-                  <li className="flex gap-2"><CheckCircle2 className="shrink-0 text-indigo-400 mt-0.5" size={16} /> Implemented TanStack Query for server state management</li>
-                  <li className="flex gap-2"><CheckCircle2 className="shrink-0 text-indigo-400 mt-0.5" size={16} /> Implemented code splitting and lazy loading</li>
-                  <li className="flex gap-2"><CheckCircle2 className="shrink-0 text-indigo-400 mt-0.5" size={16} /> Built a full Admin Dashboard to replace Excel</li>
-                  <li className="flex gap-2"><CheckCircle2 className="shrink-0 text-indigo-400 mt-0.5" size={16} /> Integrated Shopify API for order automation</li>
-                  <li className="flex gap-2"><CheckCircle2 className="shrink-0 text-indigo-400 mt-0.5" size={16} /> Developed REST APIs & microservices using Node.js</li>
+                <ul className="space-y-4 text-muted-foreground text-sm font-mono">
+                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Migrated legacy React app to Vite.</li>
+                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Applied TanStack Query for server state.</li>
+                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Implemented code splitting & lazy loading.</li>
+                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Built a full Admin Dashboard to replace Excel.</li>
+                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Integrated Shopify API for order automation.</li>
+                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Developed REST APIs & microservices.</li>
                 </ul>
               </div>
 
               {/* Impact Column - Highlighted */}
-              <div className="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-indigo-500/20 rounded-2xl p-6 backdrop-blur-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-4 opacity-5 text-white/50"><TrendingUp size={100} /></div>
-                <h4 className="flex items-center gap-2 font-semibold text-indigo-300 mb-6">
-                  <TrendingUp size={18} />
-                  Impact & Metrics
+              <div className="bg-muted border-2 border-border p-8 relative overflow-hidden group hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] transition-all">
+                <div className="absolute top-0 right-0 p-4 opacity-5 text-foreground"><TrendingUp size={100} /></div>
+                <h4 className="flex items-center gap-3 font-black text-foreground uppercase tracking-tight text-xl mb-6 pb-4 border-b-2 border-border">
+                  <TrendingUp size={24} className="text-accent" />
+                  Impact
                 </h4>
                 
                 <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-4">
-                  <motion.div variants={item} className="p-3 rounded-lg bg-black/40 border border-white/5">
-                    <div className="text-2xl font-bold text-green-400 mb-1">40%</div>
-                    <div className="text-xs text-zinc-400 uppercase tracking-wide">Bundle Size Reduction</div>
+                  <motion.div variants={item} className="p-4 bg-background border border-border flex flex-col justify-center items-start">
+                    <div className="text-3xl font-black text-accent mb-1">40%</div>
+                    <div className="text-[10px] text-muted-foreground font-mono uppercase tracking-[0.2em]">Bundle Size Reduction</div>
                   </motion.div>
                   
-                  <motion.div variants={item} className="p-3 rounded-lg bg-black/40 border border-white/5">
-                    <div className="text-2xl font-bold text-emerald-400 mb-1 flex items-center gap-2">
-                       80+ <Zap size={16} className="text-emerald-400 fill-emerald-400/20" />
+                  <motion.div variants={item} className="p-4 bg-background border border-border flex flex-col justify-center items-start">
+                    <div className="text-3xl font-black text-accent mb-1 flex items-center gap-2">
+                       80+ <Zap size={20} className="text-accent fill-accent/20" />
                     </div>
-                    <div className="text-xs text-zinc-400 uppercase tracking-wide">Lighthouse Score (from 50)</div>
+                    <div className="text-[10px] text-muted-foreground font-mono uppercase tracking-[0.2em]">Lighthouse Score (from 50)</div>
                   </motion.div>
                   
-                  <motion.div variants={item} className="p-3 rounded-lg bg-black/40 border border-white/5">
-                    <div className="text-2xl font-bold text-cyan-400 mb-1">80%</div>
-                    <div className="text-xs text-zinc-400 uppercase tracking-wide">Reduction in Manual Work</div>
-                  </motion.div>
-                  
-                  <motion.div variants={item} className="pt-2 text-sm text-indigo-200/70 border-t border-white/10 mt-2">
-                    Improved deployment speed and overall application maintainability.
+                  <motion.div variants={item} className="p-4 bg-background border border-border flex flex-col justify-center items-start">
+                    <div className="text-3xl font-black text-accent mb-1">80%</div>
+                    <div className="text-[10px] text-muted-foreground font-mono uppercase tracking-[0.2em]">Reduction in Manual Work</div>
                   </motion.div>
                 </motion.div>
               </div>

@@ -29,38 +29,37 @@ export function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 font-mono ${
           isScrolled 
-            ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-4 shadow-xl" 
+            ? "bg-background/90 backdrop-blur-xl border-b-2 border-border py-4" 
             : "bg-transparent py-6"
         }`}
       >
-        <div className="container mx-auto px-6 max-w-5xl flex items-center justify-between flex-wrap hidden md:flex">
+        <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between flex-wrap hidden md:flex">
            {/* Desktop Menu */}
           <div className="flex-1 flex justify-center hidden md:flex">
-             <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-8 py-3 rounded-full backdrop-blur-md shadow-2xl">
+             <div className="flex items-center bg-card border-2 border-border px-6 py-2 shadow-[4px_4px_0_hsl(76,100%,50%)]">
                 {links.map((link) => (
                   <a
                     key={link.name}
                     href={link.href}
-                    className="text-sm font-medium text-zinc-400 hover:text-white transition-colors relative group px-3 py-1"
+                    className="text-xs font-bold text-muted-foreground hover:text-black hover:bg-accent transition-all uppercase tracking-widest px-4 py-2"
                   >
                     {link.name}
-                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white transition-all group-hover:w-1/2 rounded-full"></span>
                   </a>
                 ))}
              </div>
           </div>
         </div>
 
-        {/* Mobile Nav Top Bar */}
-        <div className="container mx-auto px-6 flex items-center justify-between md:hidden">
-          <div className="font-bold text-white tracking-widest uppercase text-xl">A<span className="text-zinc-500">K</span></div>
+        {/* Mobile Nav */}
+        <div className="container mx-auto px-6 flex items-center justify-between md:hidden pb-2">
+          <div className="font-black text-foreground tracking-tighter uppercase text-2xl">AK<span className="text-accent">.</span></div>
           <button 
-            className="text-white p-2"
+            className="text-foreground p-2 border-2 border-border hover:bg-accent hover:text-black transition-colors"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <Menu size={24} />
+            <Menu size={20} strokeWidth={3} />
           </button>
         </div>
       </motion.nav>
@@ -72,24 +71,24 @@ export function Navbar() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[60] bg-background flex flex-col items-center justify-center font-mono border-x-8 border-accent"
           >
             <button 
-              className="absolute top-6 right-6 text-white p-2 bg-white/10 rounded-full"
+              className="absolute top-6 right-6 text-foreground p-3 border-2 border-border hover:bg-accent hover:text-black transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <X size={24} />
+              <X size={24} strokeWidth={3} />
             </button>
-            <div className="flex flex-col gap-8 text-center">
+            <div className="flex flex-col gap-6 text-center w-full max-w-xs">
               {links.map((link, i) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-3xl font-bold text-zinc-400 hover:text-white transition-colors"
+                  className="text-xl font-black text-muted-foreground hover:text-black hover:bg-accent transition-all uppercase tracking-[0.2em] border-2 border-transparent hover:border-black p-4 bg-card"
                 >
                   {link.name}
                 </motion.a>

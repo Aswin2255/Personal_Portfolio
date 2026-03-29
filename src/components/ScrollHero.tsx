@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Download, ArrowRight, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
@@ -12,6 +12,7 @@ interface ScrollHeroProps {
 export function ScrollHero({ frameCount = 100 }: ScrollHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasSizeRef = useRef({ width: 0, height: 0 });
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const currentFrameIndex = useRef(0);
   const requestRef = useRef<number | null>(null);
@@ -33,6 +34,68 @@ export function ScrollHero({ frameCount = 100 }: ScrollHeroProps) {
     return () => clearInterval(timer);
   }, []);
 
+  const drawFrame = useCallback((index: number) => {
+    if (!canvasRef.current || !imagesRef.current[index]) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const img = imagesRef.current[index];
+    
+    // Ensure the image is fully loaded before trying to draw or read its dimensions
+    if (!img.complete || img.naturalWidth === 0) return;
+
+    // Use high-DPI scaling for crisp canvas rendering on modern laptop screens
+    const dpr = window.devicePixelRatio || 1;
+    // We cache the size to avoid expensive getBoundingClientRect calls during scroll
+    let rectWidth = canvasSizeRef.current.width;
+    let rectHeight = canvasSizeRef.current.height;
+
+    if (rectWidth === 0 || rectHeight === 0) {
+      const rect = canvas.getBoundingClientRect();
+      rectWidth = rect.width;
+      rectHeight = rect.height;
+      canvasSizeRef.current = { width: rectWidth, height: rectHeight };
+    }
+
+    // Actual physical pixels needed
+    const physicalWidth = rectWidth * dpr;
+    const physicalHeight = rectHeight * dpr;
+
+    if (canvas.width !== physicalWidth || canvas.height !== physicalHeight) {
+       canvas.width = physicalWidth;
+       canvas.height = physicalHeight;
+       // Reset smoothing for crisp upscaling if needed
+       ctx.imageSmoothingEnabled = true;
+       ctx.imageSmoothingQuality = "high";
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Native implementation of 'object-fit: cover' mapping
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const canvasRatio = canvas.width / canvas.height;
+    
+    let drawWidth = canvas.width;
+    let drawHeight = canvas.height;
+    let drawX = 0;
+    let drawY = 0;
+
+    if (imgRatio > canvasRatio) {
+       // Image is relatively wider than the canvas space
+       drawHeight = canvas.height;
+       drawWidth = canvas.height * imgRatio;
+       drawX = (canvas.width - drawWidth) / 2;
+    } else {
+       // Image is relatively taller than the canvas space
+       drawWidth = canvas.width;
+       drawHeight = canvas.width / imgRatio;
+       drawY = (canvas.height - drawHeight) / 2;
+    }
+
+    ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+  }, []);
+
   // Preload images
   useEffect(() => {
     const images: HTMLImageElement[] = [];
@@ -52,27 +115,7 @@ export function ScrollHero({ frameCount = 100 }: ScrollHeroProps) {
         images.push(img);
     }
     imagesRef.current = images;
-  }, [frameCount]);
-
-  const drawFrame = (index: number) => {
-    if (!canvasRef.current || !imagesRef.current[index]) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const img = imagesRef.current[index];
-
-    // Ensure canvas dimensions match actual intrinsic size or scaled bounds
-    // Set matching dimensions upon first frame
-    if (canvas.width !== img.width || canvas.height !== img.height) {
-       canvas.width = img.width || 1000;
-       canvas.height = img.height || 1000;
-    }
-
-    // Clear and draw image stretching to cover the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  };
+  }, [frameCount, drawFrame]);
 
   useEffect(() => {
     const calculateScroll = () => {
@@ -83,6 +126,15 @@ export function ScrollHero({ frameCount = 100 }: ScrollHeroProps) {
       let progress = -rect.top / scrollRange;
       progress = Math.max(0, Math.min(1, progress));
       scrollRatioRef.current = progress;
+    };
+
+    const handleResize = () => {
+        if (canvasRef.current) {
+            const rect = canvasRef.current.getBoundingClientRect();
+            canvasSizeRef.current = { width: rect.width, height: rect.height };
+            // Trigger a redraw of current frame
+            drawFrame(currentFrameIndex.current);
+        }
     };
 
     const renderLoop = () => {
@@ -99,14 +151,17 @@ export function ScrollHero({ frameCount = 100 }: ScrollHeroProps) {
     };
 
     calculateScroll();
+    handleResize();
     
     const handleScroll = () => calculateScroll();
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
     requestRef.current = requestAnimationFrame(renderLoop);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, [frameCount, drawFrame]);

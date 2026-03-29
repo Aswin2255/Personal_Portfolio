@@ -10,110 +10,124 @@ export function ProjectsSection() {
       title: "BYOK Multi-LLM Dashboard",
       description: "Built a Multi-LLM platform where users can connect their own API keys (BYOK). Supports OpenAI, Claude, Gemini, and local models. Features include a chat interface, analytics tracking token usage, cost per model, response times, model comparison, and detailed user session usage across models.",
       techStack: ["Next.js", "Node.js", "MongoDB", "Redis", "Tailwind CSS", "Charts"],
-      type: "Featured Project",
-      icon: <KeyRound size={24} />,
-      color: "from-blue-500/20 to-indigo-500/20"
+      type: "Featured System",
+      icon: <KeyRound size={48} strokeWidth={1} />,
     },
     {
-      title: "AI Model Analytics Dashboard",
+      title: "AI Model Analytics",
       description: "Comprehensive analytics dashboard designed to monitor and evaluate AI model performance comprehensively. Tracks metrics including tokens used, accumulated costs, and response latency. Integrates a rich model comparison suite with interactive charts to aid cost-efficiency decisions.",
       techStack: ["React", "Recharts", "Node.js", "Tailwind CSS"],
-      type: "Featured Project",
-      icon: <LineChart size={24} />,
-      color: "from-emerald-500/20 to-teal-500/20"
+      type: "Data Pipeline",
+      icon: <LineChart size={48} strokeWidth={1} />,
     },
     {
-      title: "WebRTC Omegle Clone",
+      title: "WebRTC Omegle Sync",
       description: "An anonymous peer-to-peer video chat framework leveraging WebRTC for low-latency media streams. Implemented an robust WebSocket signaling server in Node.js to manage complex connection lifecycles, stream matching, and media negotiation between peers efficiently.",
       techStack: ["React", "Node.js", "WebRTC", "WebSocket", "Tailwind CSS"],
-      type: "Project",
-      icon: <MonitorPlay size={24} />,
-      color: "from-orange-500/20 to-red-500/20"
+      type: "Network Architecture",
+      icon: <MonitorPlay size={48} strokeWidth={1} />,
     }
   ];
 
   return (
-    <section id="projects" className="py-24 relative bg-black">
-      <div className="absolute top-1/4 left-0 w-1/3 h-1/3 bg-cyan-900/10 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-1/3 h-1/3 bg-blue-900/10 blur-[150px] pointer-events-none" />
+    <section id="projects" className="py-24 relative overflow-hidden bg-background border-b-2 border-border">
+      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-border pointer-events-none" />
       
-      <div className="container mx-auto px-6 max-w-5xl">
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16 md:mb-24"
+          className="mb-16 flex flex-col md:flex-row justify-between items-end gap-4"
         >
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-500">
-              Featured Projects
-            </h2>
-            <div className="h-px bg-zinc-800 flex-grow"></div>
+          <div className="flex flex-col">
+             <span className="text-accent font-mono text-xs tracking-[0.2em] mb-4 uppercase inline-block border border-accent/30 px-2 py-1 bg-accent/10 w-fit">
+               [ 02 ] DEPLOYED SYSTEMS
+             </span>
+             <h2 className="text-4xl md:text-7xl font-black text-foreground uppercase tracking-tighter mix-blend-difference">
+               Projects.
+             </h2>
           </div>
-          <p className="text-zinc-400 text-lg">My latest work focusing on full-stack apps and scalable systems.</p>
+          <div className="text-right pb-2 border-b-2 border-border hidden md:block">
+            <p className="text-muted-foreground text-sm font-mono uppercase tracking-widest max-w-xs">
+              PRODUCTION-GRADE ARCHITECTURE & SCALABLE INFRASTRUCTURE.
+            </p>
+          </div>
         </motion.div>
 
-        <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-12">
           {projects.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="group relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="group relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
             >
-              {/* Image / Visualization side */}
-              <div className={`md:col-span-6 lg:col-span-7 h-64 md:h-[400px] w-full rounded-2xl bg-gradient-to-br ${project.color} border border-white/5 relative overflow-hidden group-hover:border-white/10 transition-colors backdrop-blur-md flex items-center justify-center p-8 ${index % 2 !== 0 ? 'md:order-last' : ''}`}>
-                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
-                 {/* Abstract visual representations instead of screenshots */}
-                 <div className="w-full h-full relative rounded-xl border border-white/10 bg-black/40 shadow-2xl overflow-hidden flex flex-col">
-                   <div className="h-8 border-b border-white/10 flex items-center px-4 gap-2 bg-white/5">
-                     <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                     <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+              {/* Image / Visualization Target */}
+              <div className={`lg:col-span-7 h-64 md:h-[400px] w-full border-2 border-border bg-card relative overflow-hidden transition-colors flex items-center justify-center p-4 md:p-8 hover:border-accent ${index % 2 !== 0 ? 'lg:order-last' : ''}`}>
+                 {/* Technical Grid Background */}
+                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                 
+                 {/* Internal Console Box */}
+                 <div className="w-full h-full relative border-2 border-border bg-background flex flex-col group-hover:shadow-[8px_8px_0_hsl(76,100%,50%)] transition-all z-10">
+                   
+                   {/* Top Bar */}
+                   <div className="h-8 border-b-2 border-border flex items-center justify-between px-4 bg-muted">
+                     <div className="flex gap-2">
+                       <div className="w-2.5 h-2.5 bg-border"></div>
+                       <div className="w-2.5 h-2.5 bg-border"></div>
+                       <div className="w-2.5 h-2.5 bg-border"></div>
+                     </div>
+                     <span className="text-[10px] font-mono tracking-widest text-muted-foreground">TERMINAL_0{index + 1}</span>
                    </div>
-                   <div className="flex-1 flex items-center justify-center relative p-8">
-                     <div className="absolute bg-white/5 top-4 left-4 right-4 h-1/2 rounded-md border border-white/10 pointer-events-none" />
-                     <div className="absolute bg-white/5 bottom-4 left-4 right-4 h-1/3 rounded-md border border-white/10 pointer-events-none" />
+                   
+                   <div className="flex-1 flex flex-col items-center justify-center relative p-8">
                      <motion.div 
                         whileHover={{ scale: 1.1, rotate: 5 }} 
-                        className="text-white/30 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                        className="text-foreground group-hover:text-accent transition-colors"
                      >
                         {project.icon}
                      </motion.div>
+                     <p className="absolute bottom-4 left-4 text-[10px] font-mono text-muted-foreground uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                       STATUS: ONLINE
+                     </p>
                    </div>
                  </div>
               </div>
 
-              {/* Text side */}
-              <div className={`md:col-span-6 lg:col-span-5 flex flex-col justify-center`}>
-                <div className="mb-4">
-                  <span className="text-zinc-500 font-mono text-xs uppercase tracking-widest mb-2 block">{project.type}</span>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-indigo-400 transition-colors">
+              {/* Data / Text side */}
+              <div className="lg:col-span-5 flex flex-col justify-center py-4 bg-background z-10 relative">
+                <div className="mb-6">
+                  <span className="text-accent font-mono text-[10px] uppercase tracking-[0.3em] mb-3 block border-l-2 border-accent pl-2">{project.type}</span>
+                  <h3 className="text-3xl md:text-5xl font-black text-foreground uppercase tracking-tighter leading-none mb-4 group-hover:text-accent transition-colors">
                     {project.title}
                   </h3>
                 </div>
 
-                <div className="p-6 rounded-xl bg-white/[0.03] border border-white/5 backdrop-blur-sm text-zinc-300 text-sm md:text-base leading-relaxed mb-6 shadow-xl relative z-10">
+                <div className="border border-border p-6 bg-card text-muted-foreground text-sm font-sans leading-relaxed mb-6">
                   <p>{project.description}</p>
                 </div>
 
-                <ul className="flex flex-wrap gap-3 mb-8">
-                  {project.techStack.map((tech, i) => (
-                    <li key={i} className="text-sm font-mono text-zinc-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">{tech}</li>
-                  ))}
-                </ul>
+                <div className="mb-8">
+                  <p className="text-[10px] uppercase tracking-[0.2em] font-mono text-muted-foreground mb-3">Tech Stack_</p>
+                  <ul className="flex flex-wrap gap-2">
+                    {project.techStack.map((tech, i) => (
+                      <li key={i} className="text-xs font-mono text-foreground bg-muted px-2 py-1 border border-border">{tech}</li>
+                    ))}
+                  </ul>
+                </div>
 
-                <div className="flex items-center gap-6">
-                  <a href="#" className="flex items-center gap-2 text-white hover:text-indigo-400 transition-colors text-sm font-medium">
-                    <GithubIcon size={18} />
-                    <span>View Source</span>
+                <div className="flex items-center gap-4 mt-auto">
+                  <a href="#" className="flex items-center justify-center gap-2 border-2 border-border bg-card hover:bg-accent hover:text-black hover:border-accent transition-colors px-6 py-3 text-xs font-bold uppercase tracking-widest w-full text-center">
+                    <GithubIcon size={16} /> Source
                   </a>
-                  <a href="#" className="flex items-center gap-2 text-white hover:text-indigo-400 transition-colors text-sm font-medium">
-                    <ExternalLink size={18} />
-                    <span>Live Demo</span>
+                  <a href="#" className="flex items-center justify-center gap-2 border-2 border-border bg-card hover:bg-accent hover:text-black hover:border-accent transition-colors px-6 py-3 text-xs font-bold uppercase tracking-widest w-full text-center">
+                    <ExternalLink size={16} /> Demo
                   </a>
                 </div>
               </div>
@@ -125,10 +139,10 @@ export function ProjectsSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-24 text-center"
+          className="mt-24 text-center flex justify-center"
         >
-          <a href="https://github.com/aswinkumar" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-colors backdrop-blur-sm">
-            View all projects on GitHub <GithubIcon size={18} />
+          <a href="https://github.com/aswinkumar" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-accent text-black font-black uppercase tracking-[0.2em] hover:bg-white transition-colors border-2 border-transparent">
+            Access Full Archive <GithubIcon size={20} />
           </a>
         </motion.div>
       </div>
