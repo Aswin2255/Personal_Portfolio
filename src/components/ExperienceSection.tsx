@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Zap, TrendingUp } from "lucide-react";
+import { Briefcase, Calendar, ChevronRight } from "lucide-react";
 
 export function ExperienceSection() {
   const container = {
@@ -15,126 +15,101 @@ export function ExperienceSection() {
   };
 
   const item = {
-    hidden: { opacity: 0, x: -20 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
   return (
-    <section id="experience" className="py-24 relative overflow-hidden bg-background border-b-2 border-border">
-      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-border pointer-events-none" />
-      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border -translate-y-1/2 pointer-events-none" />
+    <section id="experience" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Ornaments */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none" />
       
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16 flex flex-col md:flex-row justify-between items-end gap-4"
+          className="mb-16 md:mb-24 flex flex-col items-center text-center"
         >
-          <div className="flex flex-col">
-             <span className="text-accent font-mono text-xs tracking-[0.2em] mb-4 uppercase inline-block border border-accent/30 px-2 py-1 bg-accent/10 w-fit">
-               [ 04 ] WORK HISTORY
-             </span>
-             <h2 className="text-4xl md:text-7xl font-black text-foreground uppercase tracking-tighter mix-blend-difference">
-               Experience.
-             </h2>
-          </div>
-          <div className="text-right pb-2 border-b-2 border-border hidden md:block">
-            <p className="text-muted-foreground text-sm font-mono uppercase tracking-widest max-w-xs">
-              REAL-WORLD IMPACT AND CASE STUDIES.
-            </p>
-          </div>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-medium tracking-wider uppercase text-sm mb-4 inline-block">
+            Work History
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight">
+            Professional Experience
+          </h2>
         </motion.div>
 
-        <div className="relative border-l-2 border-border ml-4 md:ml-0 md:pl-10 py-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-            className="mb-16 relative"
-          >
-            {/* Timeline Dot */}
-            <div className="absolute -left-[49px] top-6 w-5 h-5 bg-accent border-4 border-background box-content z-10 hidden md:block" />
+        <div className="relative">
+          {/* Main Timeline Line */}
+          <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/50 via-secondary/50 to-transparent" />
+          
+          <div className="space-y-12 md:space-y-24">
             
-            <div className="flex flex-col md:flex-row justify-between mb-8 items-start gap-4">
-               <div>
-                 <h3 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-4 uppercase tracking-tighter">
-                   Full Stack Developer 
-                   <span className="px-3 py-1 text-xs font-mono uppercase tracking-widest bg-card text-accent border border-accent/50 shadow-[2px_2px_0_hsl(76,100%,50%)]">Tag8</span>
-                 </h3>
-                 <p className="text-muted-foreground mt-4 font-mono text-sm uppercase tracking-widest">July 2023 – Present</p>
-               </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Experience Card 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5 }}
+              className="relative flex flex-col md:flex-row md:justify-between items-center group w-full"
+            >
+              {/* Timeline Dot */}
+              <div className="absolute left-[-5px] md:left-1/2 md:-translate-x-1/2 w-3 h-3 rounded-full bg-background border-2 border-primary group-hover:bg-primary transition-colors duration-300 z-10 shadow-[0_0_10px_var(--color-primary)]" />
               
-              {/* Problem Column */}
-              <div className="bg-card border-2 border-border p-8 relative overflow-hidden group hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] transition-all">
-                <div className="absolute -bottom-4 -right-4 p-4 opacity-5 text-accent group-hover:scale-110 group-hover:opacity-10 transition-all"><Activity size={120} /></div>
-                <h4 className="flex items-center gap-3 font-black text-foreground uppercase tracking-tight text-xl mb-6 pb-4 border-b-2 border-border">
-                  <div className="w-3 h-3 bg-red-500" />
-                  The Problems
-                </h4>
-                <ul className="space-y-4 text-muted-foreground text-sm font-mono">
-                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Legacy React app had large bundle size and poor performance.</li>
-                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Manual workflows were handled using Excel.</li>
-                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Lacked internal admin dashboard.</li>
-                  <li className="flex gap-3"><span className="text-red-500">{'>'}</span> Lacked Shopify order automation.</li>
-                </ul>
+              {/* Left Side (Empty on Desktop, content on Mobile) */}
+              <div className="md:w-[45%] flex justify-end mb-4 md:mb-0 hidden md:flex text-right pr-12">
+                <div className="flex items-center gap-2 text-primary font-mono text-sm tracking-wider">
+                  <Calendar size={16} /> July 2023 – Present
+                </div>
               </div>
 
-              {/* Solution Column */}
-              <div className="bg-card border-2 border-border p-8 relative overflow-hidden group hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] transition-all lg:col-span-1">
-                <div className="absolute -bottom-4 -right-4 p-4 opacity-5 text-accent group-hover:scale-110 group-hover:opacity-10 transition-all"><Zap size={120} /></div>
-                <h4 className="flex items-center gap-3 font-black text-foreground uppercase tracking-tight text-xl mb-6 pb-4 border-b-2 border-border">
-                  <div className="w-3 h-3 bg-accent" />
-                  What I Did
-                </h4>
-                <ul className="space-y-4 text-muted-foreground text-sm font-mono">
-                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Migrated legacy React app to Vite.</li>
-                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Applied TanStack Query for server state.</li>
-                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Implemented code splitting & lazy loading.</li>
-                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Built a full Admin Dashboard to replace Excel.</li>
-                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Integrated Shopify API for order automation.</li>
-                  <li className="flex gap-3"><span className="text-accent">{'>'}</span> Developed REST APIs & microservices.</li>
-                </ul>
-              </div>
-
-              {/* Impact Column - Highlighted */}
-              <div className="bg-muted border-2 border-border p-8 relative overflow-hidden group hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] transition-all">
-                <div className="absolute top-0 right-0 p-4 opacity-5 text-foreground"><TrendingUp size={100} /></div>
-                <h4 className="flex items-center gap-3 font-black text-foreground uppercase tracking-tight text-xl mb-6 pb-4 border-b-2 border-border">
-                  <TrendingUp size={24} className="text-accent" />
-                  Impact
-                </h4>
-                
-                <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-4">
-                  <motion.div variants={item} className="p-4 bg-background border border-border flex flex-col justify-center items-start">
-                    <div className="text-3xl font-black text-accent mb-1">40%</div>
-                    <div className="text-[10px] text-muted-foreground font-mono uppercase tracking-[0.2em]">Bundle Size Reduction</div>
-                  </motion.div>
+              {/* Right Side (Content) */}
+              <div className="w-full md:w-[45%] pl-8 md:pl-12">
+                <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300 shadow-xl group-hover:shadow-[0_0_30px_rgba(0,209,255,0.1)]">
+                  <div className="absolute top-0 right-0 p-4 opacity-10">
+                    <Briefcase size={80} />
+                  </div>
                   
-                  <motion.div variants={item} className="p-4 bg-background border border-border flex flex-col justify-center items-start">
-                    <div className="text-3xl font-black text-accent mb-1 flex items-center gap-2">
-                       80+ <Zap size={20} className="text-accent fill-accent/20" />
-                    </div>
-                    <div className="text-[10px] text-muted-foreground font-mono uppercase tracking-[0.2em]">Lighthouse Score (from 50)</div>
-                  </motion.div>
+                  <div className="md:hidden flex items-center gap-2 text-primary font-mono text-xs tracking-wider mb-4 border border-primary/20 px-3 py-1 bg-primary/10 rounded-full w-fit">
+                    <Calendar size={12} /> July 2023 – Present
+                  </div>
                   
-                  <motion.div variants={item} className="p-4 bg-background border border-border flex flex-col justify-center items-start">
-                    <div className="text-3xl font-black text-accent mb-1">80%</div>
-                    <div className="text-[10px] text-muted-foreground font-mono uppercase tracking-[0.2em]">Reduction in Manual Work</div>
-                  </motion.div>
-                </motion.div>
+                  <h3 className="text-2xl font-medium text-white mb-2 flex flex-wrap gap-3 items-center">
+                    Full Stack Developer
+                  </h3>
+                  <p className="text-secondary font-medium tracking-wide mb-6">TAG8</p>
+                  
+                  <ul className="space-y-3">
+                    {[
+                      "Migrated legacy React app to Vite, reducing bundle size by 40%.",
+                      "Implemented TanStack Query for remote server state management.",
+                      "Built an extensive internal Admin Dashboard replacing Excel workflows.",
+                      "Developed backend REST APIs supporting thousands of daily users.",
+                      "Integrated complex Shopify order automation microservices."
+                    ].map((item, i) => (
+                      <li key={i} className="flex gap-3 text-muted-foreground font-light text-sm md:text-base leading-relaxed">
+                        <ChevronRight size={16} className="text-primary mt-1 shrink-0" /> {item}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <div className="mt-8 flex flex-wrap gap-2">
+                     {["React", "Node.js", "Vite", "TanStack Query", "REST APIs"].map((tech) => (
+                       <span key={tech} className="px-3 py-1 bg-white/10 text-white/80 rounded-full text-xs font-mono border border-white/5">
+                         {tech}
+                       </span>
+                     ))}
+                  </div>
+                </div>
               </div>
-
-            </div>
-          </motion.div>
+            </motion.div>
+            
+          </div>
         </div>
       </div>
     </section>
   );
 }
+

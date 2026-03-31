@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { User, Code2, Cpu, LineChart } from "lucide-react";
+import { User, Code2, Server, Zap } from "lucide-react";
 
 export function AboutSection() {
   const container = {
@@ -20,64 +20,60 @@ export function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-background border-b-2 border-border">
-      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border -translate-y-1/2" />
-      <div className="absolute top-0 left-1/2 w-[1px] h-full bg-border -translate-x-1/2" />
+    <section id="about" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-4"
+          className="mb-16 md:mb-24 flex flex-col items-center text-center"
         >
-          <div className="flex flex-col">
-            <span className="text-accent font-mono text-xs tracking-[0.2em] mb-4 uppercase inline-block border border-accent/30 px-2 py-1 bg-accent/10 w-fit">
-              [ 01 ] SYSTEM IDENTITY
-            </span>
-            <h2 className="text-4xl md:text-7xl font-black text-foreground uppercase tracking-tighter mix-blend-difference">
-              About Me.
-            </h2>
-          </div>
-          <p className="text-muted-foreground text-sm md:text-base font-mono uppercase tracking-widest max-w-sm text-right pb-2 border-b-2 border-border hidden md:block">
-            Crafting digital experiences with absolute precision.
-          </p>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-medium tracking-wider uppercase text-sm mb-4 inline-block">
+            About Me
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight">
+            Building the modern web
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-5 relative group"
+            className="relative group w-full"
           >
-            <div className="absolute inset-0 bg-accent translate-x-4 translate-y-4"></div>
-            <div className="relative aspect-square border-2 border-border bg-card overflow-hidden flex flex-col items-center justify-center p-8 z-10">
-              {/* Grid Lines Background */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            {/* Glassmorphism Card */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative aspect-square md:aspect-[4/3] rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden flex flex-col items-center justify-center p-8 z-10 shadow-2xl">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
               
-              <User size={140} className="text-foreground mb-4" strokeWidth={1} />
-              <div className="border border-border bg-background px-4 py-2 font-mono text-xs uppercase tracking-widest text-muted-foreground z-10">
-                USER_PROFILE: LOADED
+              <div className="relative z-10 bg-gradient-to-br from-primary/20 to-secondary/20 p-8 rounded-full border border-white/10 mb-6 group-hover:scale-110 transition-transform duration-500">
+                <User size={64} className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" strokeWidth={1.5} />
+              </div>
+              <div className="border border-white/10 bg-black/40 backdrop-blur-md px-6 py-2 rounded-full font-mono text-xs tracking-widest text-primary z-10">
+                FULL STACK ENGINE
               </div>
             </div>
           </motion.div>
 
-          <div className="lg:col-span-7 flex flex-col gap-10">
+          <div className="flex flex-col gap-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="prose prose-invert prose-lg text-muted-foreground leading-relaxed font-sans"
             >
-              <p className="text-xl text-foreground font-medium mb-4">
-                Full Stack Developer with 2+ years of experience building scalable web applications using React, Next.js, Node.js, and modern backends. Specialized in <span className="bg-accent text-black px-1 font-bold">performance optimization</span>, scalable architecture, and real-time systems.
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light mb-6">
+                Full Stack Developer with 2+ years of experience building scalable web applications using <span className="text-white font-medium">React, Next.js, Node.js, and modern backend technologies</span>.
               </p>
-              <p>
-                Experience building admin dashboards, analytics systems, microservices, and integrating third-party APIs. Passionate about building developer tools and <strong className="text-foreground uppercase border-b border-accent pb-0.5">LLM-powered applications</strong>.
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
+                Experienced in <span className="text-white font-medium">performance optimization, REST API development, authentication systems, and microservices architecture</span>.
               </p>
             </motion.div>
 
@@ -86,30 +82,30 @@ export function AboutSection() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4"
             >
-              <motion.div variants={item} className="p-6 bg-card border-2 border-border hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] hover:-translate-y-1 transition-all group">
-                <div className="w-12 h-12 border-2 border-border flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-black transition-colors">
-                  <Code2 size={24} />
+              <motion.div variants={item} className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+                  <Code2 size={24} className="drop-shadow-[0_0_10px_var(--color-primary)]" />
                 </div>
-                <h3 className="text-foreground font-black uppercase tracking-tight mb-2 text-xl">Full Stack</h3>
-                <p className="text-xs font-mono text-muted-foreground uppercase leading-relaxed">End-to-end web apps with modern stack.</p>
+                <h3 className="text-white font-medium mb-1">Frontend</h3>
+                <p className="text-sm text-muted-foreground font-light">Next.js & React Ecosystem.</p>
               </motion.div>
               
-              <motion.div variants={item} className="p-6 bg-card border-2 border-border hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] hover:-translate-y-1 transition-all group">
-                <div className="w-12 h-12 border-2 border-border flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-black transition-colors">
-                  <Cpu size={24} />
+              <motion.div variants={item} className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group">
+                <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center mb-4 text-secondary group-hover:scale-110 transition-transform">
+                  <Server size={24} className="drop-shadow-[0_0_10px_var(--color-secondary)]" />
                 </div>
-                <h3 className="text-foreground font-black uppercase tracking-tight mb-2 text-xl">Systems</h3>
-                <p className="text-xs font-mono text-muted-foreground uppercase leading-relaxed">Microservices & real-time APIs.</p>
+                <h3 className="text-white font-medium mb-1">Backend</h3>
+                <p className="text-sm text-muted-foreground font-light">Node.js, Databases & APIs.</p>
               </motion.div>
               
-              <motion.div variants={item} className="p-6 bg-card border-2 border-border hover:border-accent hover:shadow-[4px_4px_0_hsl(76,100%,50%)] hover:-translate-y-1 transition-all group sm:col-span-2 lg:col-span-1">
-                <div className="w-12 h-12 border-2 border-border flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-black transition-colors">
-                  <LineChart size={24} />
+              <motion.div variants={item} className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group sm:col-span-2">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+                  <Zap size={24} className="drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
                 </div>
-                <h3 className="text-foreground font-black uppercase tracking-tight mb-2 text-xl">Optimize</h3>
-                <p className="text-xs font-mono text-muted-foreground uppercase leading-relaxed">Bundle size & performance tuning.</p>
+                <h3 className="text-white font-medium mb-1">Performance</h3>
+                <p className="text-sm text-muted-foreground font-light">Optimization & Microservices Architecture.</p>
               </motion.div>
             </motion.div>
           </div>
@@ -118,3 +114,4 @@ export function AboutSection() {
     </section>
   );
 }
+

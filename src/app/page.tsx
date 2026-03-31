@@ -8,7 +8,7 @@ import { Navbar } from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <main className="bg-black absolute inset-0 bg-black/40 text-foreground min-h-screen selection:bg-indigo-500/30">
+    <main className="bg-background text-foreground min-h-screen selection:bg-primary/30 selection:text-white">
       <Navbar />
       <HeroScrollAnimation />
       <AboutSection />

@@ -1,17 +1,27 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
-const FRAME_COUNT = 240;
+const FRAME_COUNT = 120;
 
 const currentFrame = (index: number) =>
-  `/frames/ezgif-frame-${index.toString().padStart(3, "0")}.jpg`;
+  `/frames/ezgif-frame-${index.toString().padStart(3, "0")}.png`;
 
 export default function HeroScrollAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(0);
+
+  const progressValue = useMotionValue(0);
+
+  // Text is completely invisible (0) until mid-scroll (0.5), then gradually appears fully by the end (0.95)
+  const textOpacity = useTransform(progressValue, [0, 0.5, 0.95], [0, 0, 1]);
+  const textY = useTransform(progressValue, [0, 0.5, 0.95], [50, 50, 0]);
+  const textScale = useTransform(progressValue, [0, 0.5, 0.95], [0.9, 0.9, 1]);
+  
+  // Scroll progress for other elements
 
   // Preload images
   useEffect(() => {
@@ -33,7 +43,7 @@ export default function HeroScrollAnimation() {
   const renderFrame = useCallback((frameIndex: number) => {
     if (!canvasRef.current || !images[frameIndex]) return;
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d", { alpha: false });
     if (!context) return;
 
     const img = images[frameIndex];
@@ -42,12 +52,18 @@ export default function HeroScrollAnimation() {
     // High-DPI Screen scaling
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
-    const physicalWidth = rect.width * dpr;
-    const physicalHeight = rect.height * dpr;
+    
+    // Calculate physical pixel dimensions
+    const physicalWidth = Math.floor(rect.width * dpr);
+    const physicalHeight = Math.floor(rect.height * dpr);
 
     if (canvas.width !== physicalWidth || canvas.height !== physicalHeight) {
       canvas.width = physicalWidth;
       canvas.height = physicalHeight;
+      // Also strictly define the logical width/height to avoid stretching
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      
       context.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = "high";
     }
@@ -96,6 +112,8 @@ export default function HeroScrollAnimation() {
       let progress = scrollPos / maxScroll;
       progress = Math.max(0, Math.min(1, progress));
 
+      progressValue.set(progress); // Manually set perfectly synced scroll value
+
       const frameIndex = Math.floor(progress * (FRAME_COUNT - 1));
       animationFrameId = requestAnimationFrame(() => renderFrame(frameIndex));
     };
@@ -108,78 +126,108 @@ export default function HeroScrollAnimation() {
       window.removeEventListener("resize", resizeCanvas);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
-  }, [imagesLoaded, renderFrame]);
+  }, [imagesLoaded, renderFrame, progressValue]);
 
   return (
-    <div ref={containerRef} className="relative h-[200vh] w-full bg-background selection:bg-accent/40 selection:text-white">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center px-4 md:px-12 py-10 pt-24 font-sans relative">
+    <div ref={containerRef} className="relative h-[300vh] w-full bg-background selection:bg-primary/40 selection:text-white">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
         
-        {/* Decorative HUD Elements */}
-        <div className="absolute top-24 right-8 hidden lg:flex items-center gap-3 text-[10px] font-mono text-[hsl(76,100%,50%)] uppercase tracking-[0.2em] border border-[hsl(76,100%,50%)]/20 px-3 py-1 bg-[#1a2e05]/30">
-           <div className="w-1.5 h-1.5 bg-[hsl(76,100%,50%)] rounded-none animate-pulse"></div>
-           OPTIMAL PERFORMANCE
+        {/* Fullscreen Canvas Background */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+          {/* Loading Indicator */}
+          {imagesLoaded < FRAME_COUNT && (
+            <div className="absolute inset-0 flex items-center justify-center z-50 bg-background text-foreground flex-col gap-6 p-8">
+              <div className="text-2xl font-black tracking-tighter uppercase">
+                Initializing<span className="animate-pulse text-primary">_</span>
+              </div>
+              <div className="w-full max-w-md h-0.5 bg-white/10 relative">
+                <div 
+                  className="absolute top-0 left-0 h-full bg-primary shadow-[0_0_10px_var(--color-primary)] transition-all duration-300 ease-out"
+                  style={{ width: `${(imagesLoaded / FRAME_COUNT) * 100}%` }}
+                />
+              </div>
+              <div className="text-xs font-mono text-muted-foreground tracking-[0.3em]">
+                [ BUFFERING: {String(Math.round((imagesLoaded / FRAME_COUNT) * 100)).padStart(3, '0')}% ]
+              </div>
+            </div>
+          )}
+
+          <canvas
+            ref={canvasRef}
+            className="block h-full w-full object-cover opacity-80"
+          />
+          
+          {/* Gradients to blend canvas with background/text */}
+          <div className="absolute inset-x-0 bottom-0 h-[60vh] bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent"></div>
         </div>
 
-        {/* Massive Title */}
-        <div className="relative z-20 text-center w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end mb-6 md:mb-10 px-4">
-          <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-black text-foreground uppercase tracking-tighter leading-none m-0 p-0 text-left mix-blend-difference z-30 pointer-events-none drop-shadow-2xl">
-            Aswin<span className="text-[hsl(76,100%,50%)]">.</span>
-          </h1>
-          <div className="text-left md:text-right mt-4 md:mt-0 pb-2">
-            <h2 className="text-lg md:text-2xl font-bold text-foreground uppercase tracking-tight">Software Engineer</h2>
-            <p className="text-xs md:text-sm font-mono text-muted-foreground uppercase max-w-[200px]">SCALABLE SYSTEMS & FULL-STACK DEVELOPMENT</p>
+        {/* HUD Overlay Elements - Clean Minimal */}
+        <div className="absolute top-24 left-6 md:left-12 z-20 flex flex-col gap-1 pointer-events-none">
+          <p className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest uppercase">
+            STATUS: ACTIVE
+          </p>
+          <div className="w-8 h-[1px] bg-primary/50"></div>
+        </div>
+        
+        <div className="absolute bottom-12 right-6 md:right-12 z-20 text-right pointer-events-none">
+          <p className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest uppercase">
+            {String(FRAME_COUNT).padStart(3, '0')} FRAMES
+          </p>
+          <div className="w-full flex justify-end mt-2">
+            <div className="w-12 h-[1px] bg-secondary/50"></div>
           </div>
         </div>
 
-        {/* The Frame Container (Bigger) */}
-        <div className="relative w-full max-w-[1400px] aspect-[4/3] md:aspect-[16/9] bg-card overflow-hidden border-2 border-border shadow-2xl flex items-center justify-center p-1 md:p-2 group">
-          <div className="relative w-full h-full border border-white/5 bg-black overflow-hidden pointer-events-none">
-             
-            {/* Loading Indicator */}
-            {imagesLoaded < FRAME_COUNT && (
-              <div className="absolute inset-0 flex items-center justify-center z-50 bg-black text-white flex-col gap-6 p-8">
-                <div className="text-2xl font-black tracking-tighter uppercase text-white">
-                  Initializing<span className="animate-pulse">_</span>
-                </div>
-                <div className="w-full max-w-md h-0.5 bg-white/10 relative">
-                  <div 
-                    className="absolute top-0 left-0 h-full bg-[hsl(76,100%,50%)] shadow-[0_0_10px_hsl(76,100%,50%)] transition-all duration-300 ease-out"
-                    style={{ width: `${(imagesLoaded / FRAME_COUNT) * 100}%` }}
-                  />
-                </div>
-                <div className="text-xs font-mono text-white/40 tracking-[0.3em]">
-                  [ BUFFERING: {String(Math.round((imagesLoaded / FRAME_COUNT) * 100)).padStart(3, '0')}% ]
-                </div>
-              </div>
-            )}
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-foreground pointer-events-none z-20"
+          style={{ opacity: useTransform(progressValue, [0, 0.1], [1, 0]) }}
+        >
+            <span className="text-[10px] uppercase font-mono tracking-[0.4em] text-muted-foreground">Scroll Down</span>
+            <div className="w-[1px] h-16 bg-gradient-to-b from-primary/50 to-transparent"></div>
+        </motion.div>
 
-            <canvas
-              ref={canvasRef}
-              className="absolute inset-0 z-0 h-full w-full object-cover opacity-90 transition-opacity duration-700 sm:object-contain md:object-cover"
-            />
+        {/* Main Content Overlay - Minimalistic Fade In */}
+        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center px-6 pointer-events-auto">
+          <motion.div 
+            style={{ opacity: textOpacity, scale: textScale, y: textY }}
+            className="w-full max-w-5xl mx-auto flex flex-col items-center text-center mt-20"
+          >
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/40 tracking-tight leading-tight m-0 pb-2 drop-shadow-2xl">
+              Aswin<span className="text-primary">.</span>
+            </h1>
             
-            {/* Inner HUD/Gradients */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 mix-blend-multiply"></div>
-            
-            <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-10 text-left pointer-events-none">
-              <div className="inline-block border border-[hsl(76,100%,50%)]/50 bg-black/60 px-3 py-1 mb-3 backdrop-blur-md">
-                <p className="text-[10px] md:text-xs text-[hsl(76,100%,50%)] font-mono tracking-widest uppercase">
-                  SEQ. {FRAME_COUNT} / READY
-                </p>
-              </div>
+            <div className="flex flex-col items-center gap-6 mt-6">
+              <h2 className="text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-medium tracking-wide">
+                Full Stack Developer
+              </h2>
+              <p className="text-base md:text-xl text-muted-foreground font-light max-w-2xl mx-auto">
+                I build scalable and high-performance web applications.
+              </p>
             </div>
             
-            <div className="absolute top-4 right-4 md:top-8 md:right-8 z-10 border border-white/10 w-12 h-12 flex items-center justify-center bg-black/20 backdrop-blur-md">
-               <div className="w-2 h-2 bg-white/80 rounded-full"></div>
+            {/* Glassmorphism Buttons */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 mt-12 w-full sm:w-auto">
+              <a href="#projects" className="relative group px-8 py-4 rounded-xl font-medium text-sm md:text-base overflow-hidden transition-all hover:scale-[1.02]">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-90 transition-opacity group-hover:opacity-100"></div>
+                <div className="absolute inset-[1px] bg-background/20 backdrop-blur-sm rounded-xl transition-all group-hover:bg-background/0"></div>
+                <span className="relative z-10 text-white flex items-center justify-center gap-2">
+                  View Projects
+                </span>
+              </a>
+              <a href="/resume.pdf" className="relative group px-8 py-4 rounded-xl font-medium text-sm md:text-base overflow-hidden transition-all hover:scale-[1.02] border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10">
+                <span className="relative z-10 text-white flex items-center justify-center gap-2">
+                  Download Resume
+                </span>
+              </a>
             </div>
-          </div>
+            
+          </motion.div>
         </div>
-        
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-muted-foreground pointer-events-none z-10">
-            <span className="text-[10px] md:text-xs uppercase font-mono tracking-[0.4em] text-[hsl(76,100%,50%)]">Scroll Down</span>
-            <div className="w-[1px] h-8 md:h-12 bg-gradient-to-b from-[hsl(76,100%,50%)] to-transparent"></div>
-        </div>
+
       </div>
     </div>
   );
 }
+

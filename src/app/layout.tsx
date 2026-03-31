@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Syne, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
-const fontSyne = Syne({
-  variable: "--font-syne",
+const fontSpace = Space_Grotesk({
+  variable: "--font-space",
   subsets: ["latin"],
   display: 'swap',
 });
 
-const fontMono = IBM_Plex_Mono({
-  variable: "--font-ibm",
+const fontInter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ['400', '500', '600'],
   display: 'swap',
 });
 
@@ -28,9 +27,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontSyne.variable} ${fontMono.variable} h-full antialiased`}
+      className={`${fontSpace.variable} ${fontInter.variable} font-sans h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#050505] text-[#FFFFFF] font-sans">{children}</body>
     </html>
   );
 }
