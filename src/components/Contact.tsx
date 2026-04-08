@@ -45,8 +45,8 @@ export function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-24">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="contact" className="py-24 relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,9 +55,9 @@ export function Contact() {
           className="max-w-4xl mx-auto text-center"
         >
           <h2 className="text-3xl font-bold tracking-tight mb-4">Get In Touch</h2>
-          <div className="w-20 h-1 bg-blue-600 rounded-full mx-auto mb-8"></div>
+          <div className="w-20 h-1 bg-blue-500 rounded-full mx-auto mb-8"></div>
           
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-foreground/70 mb-12 max-w-2xl mx-auto font-light">
             I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
           </p>
 
@@ -73,13 +73,13 @@ export function Contact() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="flex flex-col items-center p-8 bg-background border border-muted rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition-all group"
+                className="flex flex-col items-center p-8 glass-card border-none rounded-[2rem] hover:bg-white/20 dark:hover:bg-white/5 transition-all duration-300 group shadow-lg hover:shadow-2xl hover:shadow-blue-500/10"
               >
-                <div className="p-4 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400 mb-4 group-hover:scale-110 transition-transform">
+                <div className="p-4 bg-blue-100/50 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400 mb-4 group-hover:scale-110 transition-transform">
                   {link.icon}
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{link.name}</h3>
-                <p className="text-muted-foreground">{link.value}</p>
+                <p className="text-foreground/60 font-light">{link.value}</p>
               </motion.a>
             ))}
           </div>

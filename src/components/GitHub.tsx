@@ -61,8 +61,8 @@ export function GitHubSection() {
   }, [])
 
   return (
-    <section id="github" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="github" className="py-24 bg-transparent relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,25 +70,25 @@ export function GitHubSection() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col items-center mb-16">
-            <GithubIcon className="h-10 w-10 mb-4 text-foreground" />
+            <GithubIcon className="h-10 w-10 mb-4 text-foreground opacity-80" />
             <h2 className="text-3xl font-bold tracking-tight mb-4">Open Source & GitHub</h2>
-            <div className="w-20 h-1 bg-blue-600 rounded-full"></div>
+            <div className="w-20 h-1 bg-blue-500 rounded-full"></div>
           </div>
 
           {!loading && profile && (
-            <div className="max-w-4xl mx-auto mb-12 flex flex-col sm:flex-row items-center justify-between bg-background/50 border border-muted/50 p-6 rounded-2xl shadow-sm">
+            <div className="max-w-4xl mx-auto mb-12 flex flex-col sm:flex-row items-center justify-between glass-card border-none p-8 rounded-[2rem]">
               <div className="flex items-center gap-6 mb-6 sm:mb-0">
                 <img 
                   src={profile.avatar_url} 
                   alt={`${username}'s avatar`}
-                  className="w-20 h-20 rounded-full border-2 border-blue-500"
+                  className="w-20 h-20 rounded-full border-2 border-blue-500 shadow-xl"
                   loading="lazy"
                 />
                 <div>
-                  <h3 className="text-xl font-bold">@{username}</h3>
-                  <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
-                    <span><strong>{profile.public_repos}</strong> Repositories</span>
-                    <span><strong>{profile.followers}</strong> Followers</span>
+                  <h3 className="text-2xl font-bold text-foreground">@{username}</h3>
+                  <div className="flex gap-4 mt-2 text-sm text-foreground/70 font-light">
+                    <span><strong className="font-semibold text-foreground">{profile.public_repos}</strong> Repositories</span>
+                    <span><strong className="font-semibold text-foreground">{profile.followers}</strong> Followers</span>
                   </div>
                 </div>
               </div>
@@ -98,7 +98,7 @@ export function GitHubSection() {
                   href={`https://github.com/${username}`} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
+                  className="glass-button inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground h-11 px-6"
                 >
                   Follow on GitHub
                 </a>
@@ -110,7 +110,7 @@ export function GitHubSection() {
             {loading ? (
               // Loading skeletons
               Array.from({ length: 6 }).map((_, i) => (
-                <Card key={i} className="h-48 animate-pulse bg-muted/20" />
+                <Card key={i} className="h-48 animate-pulse bg-white/5 border-none rounded-[2rem]" />
               ))
             ) : (
               repos.map((repo, index) => (
@@ -121,32 +121,33 @@ export function GitHubSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
+                  className="group"
                 >
                   <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="block h-full">
-                    <Card className="h-full flex flex-col bg-background/50 hover:border-blue-500/50 transition-colors">
-                      <CardHeader className="pb-3">
-                        <CardTitle className="text-base flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                          <BookOpen className="h-4 w-4" />
+                    <Card className="h-full flex flex-col glass-card border-none rounded-3xl group-hover:bg-white/20 dark:group-hover:bg-white/5 transition-all duration-300">
+                      <CardHeader className="pb-3 pt-6 px-6">
+                        <CardTitle className="text-lg flex items-center gap-2 text-blue-500 font-semibold">
+                          <BookOpen className="h-5 w-5" />
                           {repo.name}
                         </CardTitle>
-                        <CardDescription className="line-clamp-2 text-sm h-10">
+                        <CardDescription className="line-clamp-2 text-sm h-10 text-foreground/70 font-light mt-2">
                           {repo.description || "No description provided."}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="flex-grow flex items-end">
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground w-full">
+                      <CardContent className="flex-grow flex items-end px-6 pb-6">
+                        <div className="flex items-center gap-4 text-sm text-foreground/60 w-full font-light">
                           {repo.language && (
                             <span className="flex items-center gap-1.5">
-                              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                              <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
                               {repo.language}
                             </span>
                           )}
-                          <span className="flex items-center gap-1 group-hover:text-yellow-500 transition-colors">
-                            <Star className="h-3.5 w-3.5" />
+                          <span className="flex items-center gap-1.5 group-hover:text-yellow-500 transition-colors">
+                            <Star className="h-4 w-4" />
                             {repo.stargazers_count}
                           </span>
-                          <span className="flex items-center gap-1">
-                            <GitFork className="h-3.5 w-3.5" />
+                          <span className="flex items-center gap-1.5">
+                            <GitFork className="h-4 w-4" />
                             {repo.forks_count}
                           </span>
                         </div>
@@ -163,16 +164,15 @@ export function GitHubSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-16 w-full max-w-6xl mx-auto flex flex-col items-center overflow-x-auto bg-background/50 border border-muted/50 p-6 rounded-2xl shadow-sm"
+            className="mt-16 w-full max-w-6xl mx-auto flex flex-col items-center overflow-x-auto glass-card border-none p-10 rounded-[2.5rem]"
           >
-            <h3 className="text-xl font-bold mb-6">Contributions</h3>
+            <h3 className="text-2xl font-semibold mb-8 text-foreground">Contributions</h3>
             <div className="w-full overflow-x-auto flex justify-center pb-2">
               <GitHubCalendar 
                 username={username} 
                 blockSize={14}
                 blockMargin={5}
                 fontSize={14}
-                minColor="var(--muted)" 
               />
             </div>
           </motion.div>

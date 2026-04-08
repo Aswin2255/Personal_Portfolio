@@ -10,25 +10,29 @@ const GithubIcon = ({ className }: { className?: string }) => (
 
 export function Hero() {
   return (
-    <section id="home" className="min-h-screen flex items-center pt-16">
-      <div className="container mx-auto px-4 md:px-6 relative">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100 via-background to-background dark:from-blue-900/20 dark:via-background dark:to-background blur-3xl opacity-50"></div>
+    <section id="home" className="min-h-screen flex items-center pt-16 relative">
+      <div className="container mx-auto px-4 md:px-6 z-10 w-full flex justify-center">
         
-        <div className="max-w-3xl flex flex-col items-start text-left">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="max-w-4xl w-full flex flex-col items-start text-left glass-card p-10 md:p-16 rounded-[2.5rem]"
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h2 className="text-xl md:text-2xl font-semibold text-blue-600 dark:text-blue-400 mb-2">
-              Hi, my name is
+            <h2 className="text-xl md:text-2xl font-medium text-blue-600 dark:text-blue-400 mb-3">
+              Hi, I am
             </h2>
           </motion.div>
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-4">
               Aswinkumar AR.
@@ -38,9 +42,9 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-muted-foreground mb-6">
+            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-foreground/70 mb-6">
               Full Stack Software Engineer
             </h2>
           </motion.div>
@@ -48,9 +52,9 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mb-10 leading-relaxed font-light">
               Full Stack Developer with 2+ years of experience building scalable web applications using React, Node.js, and modern web technologies. Focused on performance optimization, clean architecture, and great user experience.
             </p>
           </motion.div>
@@ -58,23 +62,23 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
             className="flex flex-wrap gap-4"
           >
-            <a href="#contact" className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-blue-600 text-white shadow hover:bg-blue-700 h-9 px-4 py-2">
+            <a href="#contact" className="inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-blue-600 text-white shadow hover:bg-blue-700 h-11 px-6">
               <Mail className="mr-2 h-4 w-4" />
               Contact Me
             </a>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="glass-button inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground h-11 px-6">
               <Download className="mr-2 h-4 w-4" />
               Download Resume
             </a>
-            <a href="https://github.com/Aswin2255" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+            <a href="https://github.com/Aswin2255" target="_blank" rel="noopener noreferrer" className="glass-button inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground h-11 px-6">
               <GithubIcon className="mr-2 h-4 w-4" />
               View GitHub
             </a>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

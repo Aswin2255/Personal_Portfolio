@@ -21,34 +21,34 @@ const TwitterIcon = ({ className }: { className?: string }) => (
 
 export function Footer() {
   return (
-    <footer className="bg-muted/50 border-t py-12">
+    <footer className="glass-panel border-x-0 border-b-0 border-t-white/10 py-12 relative z-10 mt-auto">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <a href="#home" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
               Aswinkumar
             </a>
-            <p className="text-sm text-muted-foreground mt-2">
+            <p className="text-sm text-foreground/60 mt-2 font-light">
               Building scalable web experiences.
             </p>
           </div>
           
           <div className="flex flex-col items-center md:items-end">
             <div className="flex space-x-4 mb-4">
-              <a href="https://github.com/Aswin2255" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://github.com/Aswin2255" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-foreground transition-colors mix-blend-difference">
                 <span className="sr-only">GitHub</span>
                 <GithubIcon className="h-5 w-5" />
               </a>
-              <a href="https://linkedin.com/in/aswinkumar" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://linkedin.com/in/aswinkumar" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-foreground transition-colors mix-blend-difference">
                 <span className="sr-only">LinkedIn</span>
                 <LinkedinIcon className="h-5 w-5" />
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-foreground transition-colors mix-blend-difference">
                 <span className="sr-only">Twitter</span>
                 <TwitterIcon className="h-5 w-5" />
               </a>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-foreground/50 font-light">
               © {new Date().getFullYear()} Aswinkumar AR. All rights reserved.
             </p>
           </div>

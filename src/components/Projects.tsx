@@ -40,7 +40,7 @@ export function Projects() {
         >
           <div className="flex flex-col items-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Featured Projects</h2>
-            <div className="w-20 h-1 bg-blue-600 rounded-full"></div>
+            <div className="w-20 h-1 bg-blue-500 rounded-full"></div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -54,22 +54,22 @@ export function Projects() {
                 whileHover={{ y: -10 }}
                 className="group h-full"
               >
-                <Card className="h-full flex flex-col bg-background/50 border-muted/50 overflow-hidden relative shadow-lg hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Card className="h-full flex flex-col glass-card border-none overflow-hidden relative transition-all duration-500 group-hover:bg-white/20 dark:group-hover:bg-white/5 rounded-3xl">
+                  <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity duration-500 group-hover:scale-110">
                     {project.icon}
                   </div>
-                  <CardHeader>
+                  <CardHeader className="pt-8 px-8">
                     <CardTitle className="text-xl group-hover:text-blue-500 transition-colors">
                       {project.title}
                     </CardTitle>
-                    <CardDescription className="pt-3">
+                    <CardDescription className="pt-3 text-foreground/70 font-light">
                       {project.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="flex-grow space-y-4">
+                  <CardContent className="flex-grow space-y-4 px-8">
                     <div>
-                      <h4 className="text-sm font-semibold mb-2">Key Features:</h4>
-                      <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                      <h4 className="text-sm font-medium mb-2">Key Features:</h4>
+                      <ul className="list-disc list-inside text-sm text-foreground/60 space-y-1 font-light">
                         {project.features.map((feature, i) => (
                           <li key={i}>{feature}</li>
                         ))}
@@ -77,18 +77,18 @@ export function Projects() {
                     </div>
                     <div className="flex flex-wrap gap-2 pt-2">
                       {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="outline" className="bg-background/50">
+                        <Badge key={tech} variant="outline" className="glass-button bg-transparent border-white/20 font-normal">
                           {tech}
                         </Badge>
                       ))}
                     </div>
                   </CardContent>
-                  <CardFooter className="flex gap-4 pt-6 border-t border-muted/20">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-8 px-3">
+                  <CardFooter className="flex gap-4 p-8 pt-0 mt-4">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-xl text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring glass-button h-10 px-4">
                       <GithubIcon className="mr-2 h-4 w-4" />
                       Code
                     </a>
-                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 px-3">
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-xl text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-blue-600 text-white shadow hover:bg-blue-700 h-10 px-4">
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Demo
                     </a>
