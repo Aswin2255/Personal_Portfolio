@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Badge } from "./ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { ExternalLink, Video } from "lucide-react"
+import { ExternalLink, Video, Camera } from "lucide-react"
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -13,6 +13,20 @@ const GithubIcon = ({ className }: { className?: string }) => (
 export function Projects() {
   const projects = [
     {
+      title: "Chithram",
+      description: "A comprehensive web-based photo editing application.",
+      technologies: ["React", "JavaScript", "Tailwind CSS"],
+      features: [
+        "Web-based photo capabilities",
+        "Multiple filters and adjustments",
+        "Responsive user interface",
+        "Image export functionalities",
+      ],
+      github: "https://github.com/Aswin2255/Chithram.git",
+      live: "https://chithram-iota.vercel.app/",
+      icon: <Camera className="h-6 w-6 text-blue-500" />,
+    },
+    {
       title: "Omegle-style P2P Video Chat App",
       description: "A real-time video chat application allowing users to connect randomly with strangers. Engineered with WebRTC for peer-to-peer connection and WebSocket for rapid signaling.",
       technologies: ["React", "Node.js", "WebRTC", "WebSocket", "Tailwind CSS", "TypeScript"],
@@ -22,11 +36,10 @@ export function Projects() {
         "Direct peer-to-peer connection",
         "Responsive glassmorphism UI",
       ],
-      github: "https://github.com/Aswin2255",
-      live: "#",
+      github: "https://github.com/Aswin2255/omegle_clone.git",
+      live: "",
       icon: <Video className="h-6 w-6 text-blue-500" />,
     },
-    // We can add more projects here if requested, but for now we'll feature the main one
   ]
 
   return (
@@ -88,10 +101,12 @@ export function Projects() {
                       <GithubIcon className="mr-2 h-4 w-4" />
                       Code
                     </a>
-                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-xl text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-blue-600 text-white shadow hover:bg-blue-700 h-10 px-4">
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Demo
-                    </a>
+                    {project.live && (
+                      <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-xl text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-blue-600 text-white shadow hover:bg-blue-700 h-10 px-4">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Demo
+                      </a>
+                    )}
                   </CardFooter>
                 </Card>
               </motion.div>

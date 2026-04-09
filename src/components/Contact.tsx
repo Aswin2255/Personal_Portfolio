@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Mail, Phone } from "lucide-react"
+
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -19,28 +19,16 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
 export function Contact() {
   const contactLinks = [
     {
-      name: "Email",
-      value: "hello@example.com", // Placeholder
-      icon: <Mail className="h-6 w-6" />,
-      href: "mailto:hello@example.com",
-    },
-    {
       name: "LinkedIn",
-      value: "linkedin.com/in/aswinkumar", // Placeholder
+      value: "LinkedIn Profile",
       icon: <LinkedinIcon className="h-6 w-6" />,
-      href: "https://linkedin.com/in/aswinkumar",
+      href: "https://www.linkedin.com/feed/",
     },
     {
       name: "GitHub",
       value: "github.com/Aswin2255",
       icon: <GithubIcon className="h-6 w-6" />,
       href: "https://github.com/Aswin2255",
-    },
-    {
-      name: "Phone",
-      value: "+1 (555) 000-0000", // Placeholder
-      icon: <Phone className="h-6 w-6" />,
-      href: "tel:+15550000000",
     },
   ]
 

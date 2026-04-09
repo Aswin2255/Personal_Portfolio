@@ -13,11 +13,6 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-const TwitterIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-)
 
 export function Footer() {
   return (
@@ -39,13 +34,9 @@ export function Footer() {
                 <span className="sr-only">GitHub</span>
                 <GithubIcon className="h-5 w-5" />
               </a>
-              <a href="https://linkedin.com/in/aswinkumar" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-foreground transition-colors mix-blend-difference">
+              <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-foreground transition-colors mix-blend-difference">
                 <span className="sr-only">LinkedIn</span>
                 <LinkedinIcon className="h-5 w-5" />
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-foreground transition-colors mix-blend-difference">
-                <span className="sr-only">Twitter</span>
-                <TwitterIcon className="h-5 w-5" />
               </a>
             </div>
             <p className="text-sm text-foreground/50 font-light">

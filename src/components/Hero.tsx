@@ -69,7 +69,7 @@ export function Hero() {
               <Mail className="mr-2 h-4 w-4" />
               Contact Me
             </a>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="glass-button inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground h-11 px-6">
+            <a href="/aswinkumar.pdf" target="_blank" rel="noopener noreferrer" className="glass-button inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground h-11 px-6">
               <Download className="mr-2 h-4 w-4" />
               Download Resume
             </a>
